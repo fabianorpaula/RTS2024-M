@@ -79,16 +79,20 @@ public class Fazendeiro : MonoBehaviour
         if(temporizador > 1)
         {
             temporizador = 0;
-            
-            if(madeira >= limiteMadeira)
+
+            if (Emprego == Proficao.Madereiro)
             {
-                Debug.Log("TERMINEI");
-                MeuEstado = Estados.Retornar;
+                ColherMadeira();
             }
-            else
+            if (Emprego == Proficao.Carneiro)
             {
-                madeira++;
+                ColherCarne();
             }
+            if (Emprego == Proficao.Oureiro)
+            {
+                ColherOuro();
+            }
+
         }
 
     }
@@ -105,10 +109,53 @@ public class Fazendeiro : MonoBehaviour
         }
     }
 
+    void ColherMadeira()
+    {
+        if (madeira >= limiteMadeira)
+        {
+            Debug.Log("TERMINEI");
+            MeuEstado = Estados.Retornar;
+        }
+        else
+        {
+            madeira++;
+        }
+    }
+
+    void ColherCarne()
+    {
+        if (carne >= limiteCarne)
+        {
+            Debug.Log("TERMINEI");
+            MeuEstado = Estados.Retornar;
+        }
+        else
+        {
+            carne++;
+        }
+    }
+
+    void ColherOuro()
+    {
+        if (ouro >= limiteOuro)
+        {
+            Debug.Log("TERMINEI");
+            MeuEstado = Estados.Retornar;
+        }
+        else
+        {
+            ouro++;
+        }
+    }
+
     void Depositar()
     {
         Local_Casa.GetComponent<Casa>().ReceberMadeira(madeira);
         madeira = 0;
+        Local_Casa.GetComponent<Casa>().ReceberCarne(carne);
+        carne = 0;
+        Local_Casa.GetComponent<Casa>().ReceberOuro(ouro);
+        ouro = 0;
         MeuEstado = Estados.Trabalhar;
     }
 }
