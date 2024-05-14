@@ -11,6 +11,8 @@ public class Fazendeiro : MonoBehaviour
     private int limiteMadeira = 10;
     public GameObject Local_Casa;
     public GameObject Local_Floresta;
+    public GameObject Local_Carne;
+    public GameObject Local_Ouro;
     private float temporizador;
 
     public enum Estados { Trabalhar, Retornar };

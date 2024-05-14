@@ -5,6 +5,8 @@ using UnityEngine;
 public class Casa : MonoBehaviour
 {
     public int depositoMadeira;
+    public int depositoCarne;
+    public int depositoOuro;
     void Start()
     {
         
@@ -20,5 +22,13 @@ public class Casa : MonoBehaviour
     public void ReceberMadeira(int madeiraRecebida)
     {
         depositoMadeira = depositoMadeira + madeiraRecebida;
+    }
+    public void ReceberCarne(int carneRecebida)
+    {
+        depositoCarne = depositoCarne + carneRecebida;
+    }
+    public void ReceberOuro(int ouroRecebido)
+    {
+        depositoOuro = depositoOuro + ouroRecebido;
     }
 }
