@@ -158,4 +158,22 @@ public class Fazendeiro : MonoBehaviour
         ouro = 0;
         MeuEstado = Estados.Trabalhar;
     }
+
+
+    public void Linkedin(string tipoDeTrabalho)
+    {
+        if(tipoDeTrabalho == "Madeira")
+        {
+            Emprego = Proficao.Madereiro;
+        }
+        if(tipoDeTrabalho == "Ouro")
+        {
+            Emprego = Proficao.Oureiro;
+        }
+        if (tipoDeTrabalho == "Carne")
+        {
+            Emprego = Proficao.Carneiro;
+        }
+
+    }
 }
