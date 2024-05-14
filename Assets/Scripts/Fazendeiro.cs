@@ -9,6 +9,11 @@ public class Fazendeiro : MonoBehaviour
     private NavMeshAgent Agente;
     public int madeira = 0;
     private int limiteMadeira = 10;
+    public int carne = 0;
+    private int limiteCarne = 10;
+    public int ouro = 0;
+    private int limiteOuro = 10;
+
     public GameObject Local_Casa;
     public GameObject Local_Floresta;
     public GameObject Local_Carne;
@@ -17,6 +22,9 @@ public class Fazendeiro : MonoBehaviour
 
     public enum Estados { Trabalhar, Retornar };
     public Estados MeuEstado;
+
+    public enum Proficao { Madereiro, Carneiro, Oureiro};
+    public Proficao Emprego;
     
     void Start()
     {
@@ -40,14 +48,28 @@ public class Fazendeiro : MonoBehaviour
 
     void IrTrabalhar()
     {
-        Agente.SetDestination(Local_Floresta.transform.position);
-        float DistanciaObjetivo = Vector3.Distance(transform.position, 
-            Local_Floresta.transform.position);
+        Vector3 Destino = Local_Casa.transform.position;
+        if(Emprego == Proficao.Madereiro)
+        {
+            Destino = Local_Floresta.transform.position;
+        }
+        if (Emprego == Proficao.Carneiro)
+        {
+            Destino = Local_Carne.transform.position;
+        }
+        if (Emprego == Proficao.Oureiro)
+        {
+            Destino = Local_Ouro.transform.position;
+        }
+        Agente.SetDestination(Destino);
+        float DistanciaObjetivo = Vector3.Distance(transform.position,
+            Destino);
 
         if (DistanciaObjetivo < 5)
         {
             FazerColheita();
         }
+
     }
 
 
