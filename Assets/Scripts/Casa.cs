@@ -128,7 +128,7 @@ public class Casa : MonoBehaviour
                 meuFazendeiro.GetComponent<Fazendeiro>().Local_Floresta = Floresta;
                 meuFazendeiro.GetComponent<Fazendeiro>().Local_Ouro = Ouro;
                 meuFazendeiro.GetComponent<Fazendeiro>().Local_Casa = this.gameObject;
-
+                meuFazendeiro.GetComponent<Fazendeiro>().Local_Exercito = Exercito;
                 meuFazendeiro.GetComponent<Fazendeiro>().Linkedin(trabalho);
 
                 Fazendeiros.Add(meuFazendeiro);

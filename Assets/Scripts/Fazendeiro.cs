@@ -41,17 +41,20 @@ public class Fazendeiro : MonoBehaviour
         if(Emprego == Proficao.Militar)
         {
             IrGuerra();
-            
-        }
 
-        if (MeuEstado == Estados.Trabalhar)
-        {
-            IrTrabalhar();
         }
-        if (MeuEstado == Estados.Retornar)
+        else
         {
-            IrPraCasa();
+            if (MeuEstado == Estados.Trabalhar)
+            {
+                IrTrabalhar();
+            }
+            if (MeuEstado == Estados.Retornar)
+            {
+                IrPraCasa();
+            }
         }
+       
 
 
     }
@@ -68,7 +71,7 @@ public class Fazendeiro : MonoBehaviour
 
             if (DistanciaObjetivo < 5)
             {
-                
+                ProducaoGuerra();
             }
         }
     }
