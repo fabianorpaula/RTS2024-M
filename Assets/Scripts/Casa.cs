@@ -35,7 +35,7 @@ public class Casa : MonoBehaviour
     void Start()
     {
         Time.timeScale = 5;
-        InicializarFazendeiroAutomatizado("Carne");
+        InicializarFazendeiroAutomatizado("Ouro");
         InicializarFazendeiroAutomatizado("Carne");
         InicializarFazendeiroAutomatizado("Madeira");
         InicializarFazendeiroAutomatizado("Carne");
@@ -69,6 +69,24 @@ public class Casa : MonoBehaviour
         {
             ConstruirCasa();
         }
+        
+        if(depositoOuro > 100)
+        {
+            CursoTecnico();
+        }
+    }
+
+    void CursoTecnico()
+    {
+        if(depositoOuro - 100 > 0)
+        {
+            depositoOuro = depositoOuro - 100;
+            for (int i = 0; i < Fazendeiros.Count; i++)
+            {
+                Fazendeiros[i].GetComponent<Fazendeiro>().Evolucao();
+            }
+        }
+        
     }
 
     public void ConstruirCasa()

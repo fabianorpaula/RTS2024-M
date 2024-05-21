@@ -8,11 +8,11 @@ public class Fazendeiro : MonoBehaviour
 
     private NavMeshAgent Agente;
     public int madeira = 0;
-    private int limiteMadeira = 10;
+    public int limiteMadeira = 10;
     public int carne = 0;
-    private int limiteCarne = 10;
+    public int limiteCarne = 10;
     public int ouro = 0;
-    private int limiteOuro = 10;
+    public int limiteOuro = 10;
 
     public GameObject Local_Casa;
     public GameObject Local_Floresta;
@@ -176,4 +176,12 @@ public class Fazendeiro : MonoBehaviour
         }
 
     }
+
+    public void Evolucao()
+    {
+        limiteMadeira++;
+        limiteCarne++;
+        limiteOuro++;
+}
+
 }
