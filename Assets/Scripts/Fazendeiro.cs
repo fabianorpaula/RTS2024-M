@@ -13,17 +13,19 @@ public class Fazendeiro : MonoBehaviour
     public int limiteCarne = 10;
     public int ouro = 0;
     public int limiteOuro = 10;
+    public int forcaMilitar = 1;
 
     public GameObject Local_Casa;
     public GameObject Local_Floresta;
     public GameObject Local_Carne;
     public GameObject Local_Ouro;
+    public GameObject Local_Exercito;
     private float temporizador;
 
-    public enum Estados { Trabalhar, Retornar };
+    public enum Estados { Trabalhar, Retornar, Guerra };
     public Estados MeuEstado;
 
-    public enum Proficao { Madereiro, Carneiro, Oureiro};
+    public enum Proficao { Madereiro, Carneiro, Oureiro, Militar};
     public Proficao Emprego;
     
     void Start()
@@ -35,6 +37,13 @@ public class Fazendeiro : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(Emprego == Proficao.Militar)
+        {
+            IrGuerra();
+            
+        }
+
         if (MeuEstado == Estados.Trabalhar)
         {
             IrTrabalhar();
@@ -43,8 +52,26 @@ public class Fazendeiro : MonoBehaviour
         {
             IrPraCasa();
         }
+
+
     }
 
+    void IrGuerra()
+    {
+        
+        if (Emprego == Proficao.Militar)
+        {
+            Vector3 Destino = Local_Exercito.transform.position;
+            Agente.SetDestination(Destino);
+            float DistanciaObjetivo = Vector3.Distance(transform.position,
+                Destino);
+
+            if (DistanciaObjetivo < 5)
+            {
+                
+            }
+        }
+    }
 
     void IrTrabalhar()
     {
@@ -113,7 +140,7 @@ public class Fazendeiro : MonoBehaviour
     {
         if (madeira >= limiteMadeira)
         {
-            Debug.Log("TERMINEI");
+            //Debug.Log("TERMINEI");
             MeuEstado = Estados.Retornar;
         }
         else
@@ -126,7 +153,7 @@ public class Fazendeiro : MonoBehaviour
     {
         if (carne >= limiteCarne)
         {
-            Debug.Log("TERMINEI");
+            //Debug.Log("TERMINEI");
             MeuEstado = Estados.Retornar;
         }
         else
@@ -139,7 +166,7 @@ public class Fazendeiro : MonoBehaviour
     {
         if (ouro >= limiteOuro)
         {
-            Debug.Log("TERMINEI");
+            //Debug.Log("TERMINEI");
             MeuEstado = Estados.Retornar;
         }
         else
@@ -147,6 +174,18 @@ public class Fazendeiro : MonoBehaviour
             ouro++;
         }
     }
+
+    void ProducaoGuerra()
+    {
+
+        temporizador += Time.deltaTime;
+        if (temporizador > 1)
+        {
+            temporizador = 0;
+            Local_Casa.GetComponent<Casa>().ProducaoGuerra(forcaMilitar);
+        }
+    }
+
 
     void Depositar()
     {
@@ -174,6 +213,11 @@ public class Fazendeiro : MonoBehaviour
         {
             Emprego = Proficao.Carneiro;
         }
+        if (tipoDeTrabalho == "Militar")
+        {
+            Emprego = Proficao.Militar;
+            MeuEstado = Estados.Guerra;
+        }
 
     }
 
@@ -182,6 +226,7 @@ public class Fazendeiro : MonoBehaviour
         limiteMadeira++;
         limiteCarne++;
         limiteOuro++;
-}
+        forcaMilitar++;
+    }
 
 }

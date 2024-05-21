@@ -8,11 +8,13 @@ public class Casa : MonoBehaviour
     public int depositoMadeira;
     public int depositoCarne;
     public int depositoOuro;
+    public int forcaMilitar;
 
     //Informacoes
     public GameObject Floresta;
     public GameObject Carne;
     public GameObject Ouro;
+    public GameObject Exercito;
 
 
     public GameObject Fazendeiro;
@@ -36,7 +38,7 @@ public class Casa : MonoBehaviour
     {
         Time.timeScale = 5;
         InicializarFazendeiroAutomatizado("Ouro");
-        InicializarFazendeiroAutomatizado("Carne");
+        InicializarFazendeiroAutomatizado("Militar");
         InicializarFazendeiroAutomatizado("Madeira");
         InicializarFazendeiroAutomatizado("Carne");
     }
@@ -50,6 +52,7 @@ public class Casa : MonoBehaviour
 
     void Logica()
     {
+        //Mais Fazendeiros
         if(depositoCarne > 250)
         {
             if(qtdC < 3)
@@ -64,12 +67,12 @@ public class Casa : MonoBehaviour
             }
             
         }
-
+        //Mais Casas
         if(depositoMadeira > 300)
         {
             ConstruirCasa();
         }
-        
+        //Evoluir Fazendeiros
         if(depositoOuro > 100)
         {
             CursoTecnico();
@@ -168,5 +171,8 @@ public class Casa : MonoBehaviour
         depositoMadeira = depositoMadeira - (Fazendeiros.Count * 1);
     }
 
-
+    public void ProducaoGuerra(int poderSoldado)
+    {
+        forcaMilitar = forcaMilitar + poderSoldado;
+    }
 }
