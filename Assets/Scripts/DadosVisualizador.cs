@@ -24,7 +24,9 @@ public class DadosVisualizador : MonoBehaviour
 
         if(MinhaCasa.morto == false)
         {
-            nome.text = "Nome: "+MinhaCasa.meuNome;
+            nome.text = "Nome: "+MinhaCasa.meuNome
+                +"   F:"+MinhaCasa.Fazendeiros.Count.ToString()
+                +"/C:"+MinhaCasa.QtdCasas.ToString();
             comida.text = "Comida: "+MinhaCasa.depositoCarne.ToString();
             madeira.text = "Madeira: "+MinhaCasa.depositoMadeira.ToString();
             ouro.text = "Ouro: "+MinhaCasa.depositoOuro.ToString();

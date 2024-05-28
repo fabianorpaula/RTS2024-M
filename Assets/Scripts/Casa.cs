@@ -43,11 +43,11 @@ public class Casa : MonoBehaviour
     {
 
         meuNome = Nomes[numeroJogador];
-        Time.timeScale = 5;
-        InicializarFazendeiroAutomatizado("Ouro");
+        Time.timeScale = 3;
+        /*InicializarFazendeiroAutomatizado("Ouro");
         InicializarFazendeiroAutomatizado("Militar");
         InicializarFazendeiroAutomatizado("Madeira");
-        InicializarFazendeiroAutomatizado("Carne");
+        InicializarFazendeiroAutomatizado("Carne");*/
     }
 
     // Update is called once per frame
@@ -75,25 +75,95 @@ public class Casa : MonoBehaviour
         }
     }
 
+   
+
     void Logica()
     {
-        //Mais Fazendeiros
-        if(depositoCarne > 250)
+        if(numeroJogador < 8)
         {
-            if(qtdC < 3)
+            if (depositoCarne > 250)
             {
-                InicializarFazendeiroAutomatizado("Carne");
-                qtdC++;
+                if (numeroJogador < 4)
+                {
+                    if (qtdC < 3)
+                    {
+                        InicializarFazendeiroAutomatizado("Carne");
+                        qtdC++;
+                    }
+                    else
+                    {
+                        float r2 = Random.Range(0, 100);
+                        if(r2 < 75)
+                        {
+                            InicializarFazendeiroAutomatizado("Madeira");
+                        }else if(r2 < 95)
+                        {
+                            InicializarFazendeiroAutomatizado("Militar");
+                        }
+                        else
+                        {
+                            InicializarFazendeiroAutomatizado("Ouro");
+                        }
+                        
+                        qtdC = 0;
+                    }
+                }
+                else if (numeroJogador < 8)
+                {
+                    float rand = Random.Range(0, 100);
+
+                    if (rand < 25)
+                    {
+                        InicializarFazendeiroAutomatizado("Carne");
+                    }
+                    else if (rand < 50)
+                    {
+                        InicializarFazendeiroAutomatizado("Madeira");
+                    }
+                    else if (rand < 75)
+                    {
+                        InicializarFazendeiroAutomatizado("Ouro");
+
+                    }
+                    else
+                    {
+                        InicializarFazendeiroAutomatizado("Militar");
+                    }
+                }
+
+
+
             }
-            else
+
+        }
+        //Mais Fazendeiros
+        if (numeroJogador >= 8)
+        {
+            if(depositoCarne > 200)
             {
-                InicializarFazendeiroAutomatizado("Madeira");
-                qtdC = 0;
+                float rand = Random.Range(0, 100);
+
+                if (rand < 50)
+                {
+                    InicializarFazendeiroAutomatizado("Carne");
+                }
+                else if (rand < 75)
+                {
+                    InicializarFazendeiroAutomatizado("Madeira");
+                }
+                else if (rand < 80)
+                {
+                    InicializarFazendeiroAutomatizado("Ouro");
+
+                }
+                else
+                {
+                    InicializarFazendeiroAutomatizado("Militar");
+                }
             }
-            
         }
         //Mais Casas
-        if(depositoMadeira > 300)
+        if(depositoMadeira > 150)
         {
             ConstruirCasa();
         }
@@ -171,12 +241,12 @@ public class Casa : MonoBehaviour
         relogio += Time.deltaTime;
         passador += Time.deltaTime;
         passador2 += Time.deltaTime;
-        if (passador >= 10)
+        if (passador >= 7)
         {
             ConsumoCarne();
             passador = 0;
         }
-        if (passador2 >= 30)
+        if (passador2 >= 10)
         {
             ConsumoMadeira();
             passador2 = 0;
@@ -187,7 +257,7 @@ public class Casa : MonoBehaviour
     void ConsumoCarne()
     {
         //Carne
-        depositoCarne = depositoCarne - (Fazendeiros.Count * 1);
+        depositoCarne = depositoCarne - (Fazendeiros.Count * 2);
 
     }
     void ConsumoMadeira()
@@ -198,7 +268,7 @@ public class Casa : MonoBehaviour
 
     public void ProducaoGuerra(int poderSoldado)
     {
-        if(morto == true)
+        if(morto == false)
         {
             forcaMilitar = forcaMilitar + poderSoldado;
         }
