@@ -9,16 +9,21 @@ public class Casa : MonoBehaviour
     public int depositoCarne;
     public int depositoOuro;
     public int forcaMilitar;
+    public bool morto = false;
+    public string meuNome = "NOME";
 
     //Informacoes
     public GameObject Floresta;
     public GameObject Carne;
     public GameObject Ouro;
     public GameObject Exercito;
+    
 
 
     public GameObject Fazendeiro;
     public List<GameObject> Fazendeiros;
+    public List<string> Nomes;
+    public int numeroJogador;
 
     //public casa
     public int QtdCasas = 1; 
@@ -36,6 +41,8 @@ public class Casa : MonoBehaviour
 
     void Start()
     {
+
+        meuNome = Nomes[numeroJogador];
         Time.timeScale = 5;
         InicializarFazendeiroAutomatizado("Ouro");
         InicializarFazendeiroAutomatizado("Militar");
@@ -46,8 +53,26 @@ public class Casa : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TempoPassando();
-        Logica();
+        if(morto == false)
+        {
+            TempoPassando();
+            Logica();
+            VerificaVida();
+
+        }
+        
+    }
+
+    void VerificaVida()
+    {
+        if(depositoCarne < 0)
+        {
+            morto = true;
+        }
+        if(depositoMadeira < 0)
+        {
+            morto = true;
+        }
     }
 
     void Logica()
@@ -173,6 +198,10 @@ public class Casa : MonoBehaviour
 
     public void ProducaoGuerra(int poderSoldado)
     {
-        forcaMilitar = forcaMilitar + poderSoldado;
+        if(morto == true)
+        {
+            forcaMilitar = forcaMilitar + poderSoldado;
+        }
+        
     }
 }
